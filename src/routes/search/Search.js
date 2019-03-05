@@ -27,7 +27,7 @@ function mapStateToProps({ movies, error }) {
   };
 }
 
-class Movie extends React.Component {
+export class Search extends React.Component {
   /* eslint-disable react/forbid-prop-types */
 
   static propTypes = {
@@ -98,11 +98,10 @@ class Movie extends React.Component {
   handleChange = event => {
     this.setState({
       suggestions: [],
-      searchText: event.target.value,
-    });
-    this.setState({
+      searchText: event.currentTarget.value,
       fetching: true,
     });
+
     this.doSearch();
   };
 
@@ -122,6 +121,7 @@ class Movie extends React.Component {
           <div className={s.searchField}>
             <form onSubmit={this.handleSubmit}>
               <input
+                id="searchInput"
                 type="text"
                 placeholder="Type to search movies"
                 className={s.inputField}
@@ -173,4 +173,4 @@ class Movie extends React.Component {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(withStyles(s)(Movie));
+)(withStyles(s)(Search));
