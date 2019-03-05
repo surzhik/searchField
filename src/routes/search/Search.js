@@ -91,8 +91,13 @@ export class Search extends React.Component {
   doSearch = debounce(() => {
     const { searchText } = this.state;
     const { actions } = this.props;
-
-    actions.searchMovies(1, searchText);
+    if (searchText) {
+      actions.searchMovies(1, searchText);
+    } else {
+      this.setState({
+        fetching: false,
+      });
+    }
   }, 1000);
 
   handleChange = event => {
